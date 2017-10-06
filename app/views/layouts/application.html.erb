@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Simpleblog</title>
-  <%= csrf_meta_tags %>
-
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <title>Blog</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag 'application', 'http://fonts.googleapis.com/css?family=Raleway:400,700' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= favicon_link_tag 'favicon.ico' %>
+  <%= csrf_meta_tags %>
 </head>
 <body>
 <div id="sidebar">
@@ -16,34 +15,50 @@
         <%= image_tag "logo.svg" %>
     <% end %>
   </div>
+
   <ul>
     <li class="category">Website</li>
     <li><%= link_to "Blog", root_path %></li>
-    <li>About</li>
+    <li><%= link_to "About", about_path %></li>
   </ul>
-</div>
-<ul>
-  <li class="category">Social</li>
-  <li><a href="https://github.com/WaldemarBoichuk">GitHub</a></li>
-  <li><a href="https://dribbble.com/WladimirBoichuk>Dribbble">Dribbble</a></li>
-  <li><a href="https://www.behance.net/bojczuk9117c1e">Behance</a></li>
-  <li><a href="info@waldweb.pl">Mail</a></li>
-</ul>
 
-<p class="sing_in">Admin Login</p>
+
+  <ul>
+    <li class="category">Social</li>
+    <li><a href="https://twitter.com/mackenziechild">Twitter</a></li>
+    <li><a href="http://instagram.com/mackenziechild">Instagram</a></li>
+    <li><a href="https://github.com/mackenziechild">Github</a></li>
+    <li><a href="mailto:hey@mackenziechild.me">Email</a></li>
+  </ul>
+
+  <% if !user_signed_in? %>
+      <p class="sign_in"><%= link_to "Admin Login", new_user_session_path %></p>
+  <% end %>
 </div>
 
 <div id="main_content">
   <div id="header">
-    <p>All Posts</p>
-    <div class="button">
-      <button class="button"><%= link_to "New Post", new_post_path %></button>
-      <button class="button">Log Out</button>
-    </div>
-  </div>
-  <% flash.each do |name, msg| %>
-      <%= content_tag(:div, msg, class:"alert") %>
-  <%end%>
-  <%= yield %>
+    <% if current_page?(root_path) %>
+        <p>All Posts</p>
+    <% elsif current_page?(about_path) %>
+        <p>About</p>
+    <% else %>
+        <%= link_to "Back to All Posts", root_path %>
+    <% end %>
 
+    <% if user_signed_in? %>
+        <div class="buttons">
+          <button class="button"><%= link_to "New Post", new_post_path %></button>
+          <button class="button">Log Out</button>
+        </div>
+    <% end %>
+  </div>
+
+  <% flash.each do |name, msg| %>
+      <%= content_tag(:div, msg, class: "alert") %>
+  <% end %>
+
+  <%= yield %>
 </div>
+</body>
+</html>
