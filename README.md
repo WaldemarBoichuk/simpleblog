@@ -1,24 +1,3 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+**<h1>Hey, I'm Wladimir Boichuk</h1>
+                                                                                                                                                                                                                                                                                                                                                                                  _<p>Welcome to day 1 of my 12 Web Apps in 12 day Challenge.</p>_
+                                                                                                                                                                                                                                                                                                                                                                                  <p>Today I built a  simple blog in Rails 5. You're actually on the demo application right now. Cool stuff, right!.</p>**
